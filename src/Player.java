@@ -2,33 +2,70 @@ public class Player {
     private String name;
     private int[] scores = new int[13];
     private boolean[] used = new boolean[13];
-    private int totalUpper = 0;
-    private int totalLower = 0;
-    private int bonus = 0;
 
-    public Player(String name){
-        this.name = name; // initialize the player with its name
+
+    public void setPlayerName(String name){
+        this.name = name; // initialize the player with its name mutators
+    }
+    public String getPlayerName(){
+        return name;    // getter method for name accessors
     }
 
-    public void setScores(int categoryIndex, int score){ //adds the score, and make the combination as used after the validated arguments are passed
-        scores[categoryIndex] = score;
-        used[categoryIndex] = true;
-        if (categoryIndex >= 0 && categoryIndex <= 5 ){
-            totalUpper += score;
-        } else if (categoryIndex >= 6 && categoryIndex <= 12 ){
-            totalLower += score;
+    public boolean initialize(){
+        for (int i = 0; i < 13; i++) {
+            scores[i] = 0;
+            used[i] = false;
+        }
+        for (int i = 0; i < 13; i++) {
+            if ((used[i] != false) || (scores[i] != 0)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean setScore(int combinationNo, int score) {
+        if (setCombinationUsed(combinationNo) == true) {
+            scores[combinationNo] = score;
+            return true;
+        } else {
+            return false;
         }
     }
-
-    public boolean isCategoryAvailable(int categoryIndex) {
-        return !used[categoryIndex];
+    public int getScore(int combinationNo) {
+        return scores[combinationNo];
     }
 
-    public void checkBonus() {
-        if (totalUpper >= 63) {
-            bonus = 35;
+    private boolean setCombinationUsed(int combinationNo) {
+        if (used[combinationNo] == true) {
+            return false;
+        }
+        used[combinationNo] = true;
+        return true;
+    }
+    public boolean getCombinationUsed(int combinationNo){
+        return used[combinationNo];
+    }
+
+    public int getUpperScore(){
+        int score = 0;
+        for (int i = 0; i < 6; i++){
+            score += scores[i];
+        }
+        return score;
+    }
+    public int getLowerScore(){
+        int score = 0;
+        for (int i = 6; i < 12; i++){
+            score += scores[i];
+        }
+        return score;
+    }
+    public int getBonusScore(){
+        if (getUpperScore() > 63) {
+            return 35;
         } else {
-            bonus = 0;
+            return 0;
         }
     }
 }
