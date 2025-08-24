@@ -24,6 +24,14 @@ public class Main {
             System.out.println("Roll No - " + (i + 1));
             HumanDice.firstRoll();
             HumanDice.printDices();
+            for (int ii = 0; ii < 2; ii++){
+                if (HumanDice.reroll()){
+                    HumanDice.printDices();
+                    break;
+                } else {
+                    HumanDice.printDices();
+                };
+            }
             HumanPlayer.printAvailableComb();
             System.out.print("Enter the combination: ");
             int index = sc.nextInt(); sc.nextLine();
