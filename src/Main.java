@@ -30,6 +30,7 @@ public class Main {
 
             // --- Human Player's Turn ---
             System.out.println("--- " + HumanPlayer.getPlayerName() + "'s Turn ---");
+            HumanDice.resetTurn();
             HumanDice.firstRoll();
             System.out.println("Initial Roll:");
             HumanDice.printDices();
