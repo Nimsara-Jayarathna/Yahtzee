@@ -16,8 +16,8 @@ public class Player {
             "Full House",
             "Small Straight",
             "Large Straight",
-            "Yahtzee",
-            "Chance"
+            "Chance",
+            "YAHTZEE"
     };
 
     public void printAvailableComb() {
